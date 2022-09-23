@@ -54,9 +54,7 @@ if (isset($_SESSION['cpf'])) {
             </div>
             <?php if (isset($_SESSION['cpf'])) {
                 $cpf = $_SESSION['cpf'];
-                $sql = "SELECT *, count(cpf) FROM carrinho
-                        where cpf = $cpf";
-                $query_carrinho = mysqli_query($conexao, $sql);
+                $query_carrinho = mysqli_query($conexao, "SELECT *, count(cpf) FROM carrinho where cpf = $cpf");
                 if (mysqli_num_rows($query_carrinho) > 0) {
                     $row_carrinho = mysqli_fetch_assoc($query_carrinho); ?>
                     <div class="col-lg-3 col-6 text-right">
@@ -164,10 +162,7 @@ if (isset($_SESSION['cpf'])) {
                     </thead>
                     <tbody class="align-middle">
                         <?php
-                        $sql = "SELECT * from pedidos_concluidos 
-                                where cpf_cliente = '$cpf'
-                                order by total_comprado desc, qtd_comprada desc, nome_produto, fornecedor";
-                        $query_pedidos_concluidos = mysqli_query($conexao, $sql);
+                        $query_pedidos_concluidos = mysqli_query($conexao, "SELECT * from pedidos_concluidos where cpf_cliente = '$cpf' order by total_comprado desc, qtd_comprada desc, nome_produto, fornecedor");
                         while ($row_pedidos_concluidos = mysqli_fetch_assoc($query_pedidos_concluidos)) { ?>
                             <tr>
                                 <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> <?php if (mysqli_num_rows($query_pedidos_concluidos) > 0) {
@@ -196,9 +191,8 @@ if (isset($_SESSION['cpf'])) {
                         <h4 class="font-weight-semi-bold m-0">Meus pedidos resumo</h4>
                     </div>
                     <?php
-                    $sql = "SELECT sum(total_comprado), sum(qtd_comprada) from pedidos_concluidos where cpf_cliente = '$cpf'";
-                    $query = mysqli_query($conexao, $sql);
-                    $row_pedidos_concluidos = mysqli_fetch_assoc($query);
+                    $query_pedidos_concluidos = mysqli_query($conexao, "SELECT sum(total_comprado), sum(qtd_comprada) from pedidos_concluidos where cpf_cliente = '$cpf'");
+                    $row_pedidos_concluidos = mysqli_fetch_assoc($query_pedidos_concluidos);
                     ?>
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">

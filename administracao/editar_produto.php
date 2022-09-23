@@ -1,10 +1,9 @@
-<?php 
-include ("verificar_acesso/login_dono.php");
-include("header.php"); 
+<?php
+include("verificar_acesso/login_dono.php");
+include("header.php");
 $cod_produto = filter_input(INPUT_GET, 'cod_produto', FILTER_SANITIZE_NUMBER_INT);
 
-$sql = "SELECT * from produtos where cod_produto = '$cod_produto'";
-$query_produtos = mysqli_query($conexao, $sql);
+$query_produtos = mysqli_query($conexao, "SELECT * from produtos where cod_produto = '$cod_produto'");
 $row_produtos = mysqli_fetch_assoc($query_produtos);
 ?>
 

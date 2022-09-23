@@ -57,8 +57,7 @@ include("header.php");
                         <tbody>
 
                             <?php
-                            $sql = "SELECT * FROM produtos order by estoque, nome_produto, categoria, fornecedor";
-                            $query_produtos = mysqli_query($conexao, $sql);
+                            $query_produtos = mysqli_query($conexao, "SELECT * FROM produtos order by estoque, nome_produto, categoria, fornecedor");
                             while ($row_produtos = mysqli_fetch_assoc($query_produtos)) { ?>
                                 <tr>
                                     <?php if ($row_produtos["estoque"] <= 10) { ?>

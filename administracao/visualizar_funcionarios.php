@@ -74,8 +74,7 @@ include("header.php");
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM funcionarios order by ativo desc, cargo, usuario, usuario_id";
-                            $query_funcionarios = mysqli_query($conexao, $sql);
+                            $query_funcionarios = mysqli_query($conexao, "SELECT * FROM funcionarios order by ativo desc, cargo, usuario, usuario_id");
                             while ($row_funcionarios = mysqli_fetch_assoc($query_funcionarios)) { ?>
                                 <tr>
                                     <?php if ($row_funcionarios['ativo'] == 1) { ?>

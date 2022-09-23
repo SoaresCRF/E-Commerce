@@ -19,11 +19,7 @@ include("header.php");
             <div class="col-sm">
                 <!-- Conteúdo -->
                 <?php
-                $sql = "SELECT nome_produto, fornecedor, sum(qtd_comprada), sum(total_venda) from controle_venda  
-                where month(data_venda) = month(now()) and year(data_venda) = year(now())
-                group by nome_produto, fornecedor
-                order by qtd_comprada desc";
-                $query_controle_venda = mysqli_query($conexao, $sql);
+                $query_controle_venda = mysqli_query($conexao, "SELECT nome_produto, fornecedor, sum(qtd_comprada), sum(total_venda) from controle_venda where month(data_venda) = month(now()) and year(data_venda) = year(now()) group by nome_produto, fornecedor order by qtd_comprada desc");
 
                 if (mysqli_num_rows($query_controle_venda) > 0) { ?>
                     <div class="table-responsive">

@@ -1,6 +1,6 @@
-<?php 
-include ("verificar_acesso/login_dono.php");
-include("header.php"); 
+<?php
+include("verificar_acesso/login_dono.php");
+include("header.php");
 ?>
 
 <section class="home-section">
@@ -94,11 +94,7 @@ include("header.php");
         // Set data
         var data = [
             <?php
-            $sql = "SELECT nome_produto, sum(qtd_comprada) from controle_venda 
-                    where month(data_venda) = month(now()) and year(data_venda) = year(now())
-                    group by nome_produto, fornecedor
-                    order by qtd_comprada desc";
-            $query_controle_venda = mysqli_query($conexao, $sql);
+            $query_controle_venda = mysqli_query($conexao, "SELECT nome_produto, sum(qtd_comprada) from controle_venda where month(data_venda) = month(now()) and year(data_venda) = year(now())group by nome_produto, fornecedor order by qtd_comprada desc");
             while ($row_controle_venda = mysqli_fetch_assoc($query_controle_venda)) {
             ?> {
                     country: "<?php echo $row_controle_venda['nome_produto'] ?>",

@@ -96,10 +96,7 @@ include("header.php");
             <?php
 
             for ($i = 18; $i < 108; $i += 11) {
-                $sql = "SELECT count(data_nasc)
-                                    from clientes_cadastrados
-                                    where timestampdiff(year, data_nasc, curdate()) between $i and $i+10";
-                $query_clientes_cadastrados = mysqli_query($conexao, $sql);
+                $query_clientes_cadastrados = mysqli_query($conexao, "SELECT count(data_nasc) from clientes_cadastrados where timestampdiff(year, data_nasc, curdate()) between $i and $i+10");
                 while ($row_clientes_cadastrados = mysqli_fetch_assoc($query_clientes_cadastrados)) {
             ?> {
                         country: "<?php echo "$i ~ " . $i + 10 ?>",

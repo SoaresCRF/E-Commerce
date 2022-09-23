@@ -1,6 +1,6 @@
-<?php 
-include ("verificar_acesso/login_dono.php");
-include("header.php"); 
+<?php
+include("verificar_acesso/login_dono.php");
+include("header.php");
 ?>
 
 <section class="home-section">
@@ -94,9 +94,7 @@ include("header.php");
         // Set data
         var data = [
             <?php
-            $sql = "SELECT estado, count(estado) from clientes_cadastrados
-            group by estado";
-            $query_clientes_cadastrados = mysqli_query($conexao, $sql);
+            $query_clientes_cadastrados = mysqli_query($conexao, "SELECT estado, count(estado) from clientes_cadastrados group by estado");
             while ($row_clientes_cadastrados = mysqli_fetch_assoc($query_clientes_cadastrados)) {
             ?> {
                     country: "<?php echo $row_clientes_cadastrados['estado'] ?>",

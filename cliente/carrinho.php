@@ -54,9 +54,7 @@ if (isset($_SESSION['cpf'])) {
             </div>
             <?php if (isset($_SESSION['cpf'])) {
                 $cpf = $_SESSION['cpf'];
-                $sql = "SELECT *, count(cpf) FROM carrinho
-                        where cpf = $cpf";
-                $query_carrinho = mysqli_query($conexao, $sql);
+                $query_carrinho = mysqli_query($conexao, "SELECT *, count(cpf) FROM carrinho where cpf = $cpf");
                 if (mysqli_num_rows($query_carrinho) > 0) {
                     $row_carrinho = mysqli_fetch_assoc($query_carrinho); ?>
                     <div class="col-lg-3 col-6 text-right">
@@ -172,12 +170,10 @@ if (isset($_SESSION['cpf'])) {
                         $qtd_comprada = 0;
                         $total = 0;
                         $itens = 0;
-                        $sql = "SELECT * from carrinho where cpf = '$cpf'";
-                        $query_carrinho = mysqli_query($conexao, $sql);
+                        $query_carrinho = mysqli_query($conexao, "SELECT * from carrinho where cpf = '$cpf'");
                         while ($row_carrinho = mysqli_fetch_assoc($query_carrinho)) {
                             $cod_produto = $row_carrinho['cod_produto'];
-                            $sql = "SELECT * from produtos where cod_produto = '$cod_produto'";
-                            $query_produtos = mysqli_query($conexao, $sql);
+                            $query_produtos = mysqli_query($conexao, "SELECT * from produtos where cod_produto = '$cod_produto'");
                             $row_produtos = mysqli_fetch_assoc($query_produtos);
                             $itens += 1;
                         ?>
