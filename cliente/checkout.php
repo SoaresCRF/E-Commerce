@@ -182,6 +182,150 @@ if (isset($_SESSION['cpf'])) {
         endif;
         unset($_SESSION['compra_realizada']);
         ?>
+
+
+        <?php
+        if (isset($_SESSION['dados_atualizados'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: green; font-size: 22px;">Dados atualizados!!!</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['dados_atualizados']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['preencha_campo'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Preencha todos os campos.</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['preencha_campo']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['email_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Informe e-mail válido</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['email_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['cep_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">CEP inválido</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['cep_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['ddd_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">DDD não encontrado</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['ddd_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['celular_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Celular fora do padrão</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['celular_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['numero_casa_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Somente números</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['numero_casa_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['estado_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Estado inválido</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['estado_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['cidade_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Cidade inválida</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['cidade_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['bairro_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Bairro inválido</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['bairro_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['rua_invalido'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">Rua inválida</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['rua_invalido']);
+        ?>
+
+
+        <?php
+        if (isset($_SESSION['email_existe'])) :
+        ?>
+            <div class="text-center mb-4">
+                <p style="color: red; font-size: 22px;">E-mail informado já cadastrado. Informe outro</p>
+            </div>
+        <?php
+        endif;
+        unset($_SESSION['email_existe']);
+        ?>
     </div>
 
     <!-- Checkout Start -->
@@ -237,9 +381,9 @@ if (isset($_SESSION['cpf'])) {
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Número casa</label>
-                                <input class="form-control" name="numero_casa" value="<?php if (mysqli_num_rows($query_clientes_cadastrados) > 0) {
-                                                                                            echo $row_clientes_cadastrados['numero_casa'];
-                                                                                        } ?>" type="text" placeholder="123">
+                                <input class="form-control" pattern="[0-9]+" title="Somente números" id="somenteNumero" name="numero_casa" value="<?php if (mysqli_num_rows($query_clientes_cadastrados) > 0) {
+                                                                                                                                                        echo $row_clientes_cadastrados['numero_casa'];
+                                                                                                                                                    } ?>" type="text" placeholder="123">
                             </div>
                             <div class="col-md-3 form-group">
                                 <div class="custom-control custom-checkbox">

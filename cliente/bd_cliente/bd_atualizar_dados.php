@@ -139,6 +139,8 @@ $cep = preg_replace('/[^0-9]/', "", $cep);
 //Atualiza os dados do cliente
 mysqli_query($conexao, "UPDATE clientes_cadastrados set numero_casa = '$numero_casa', celular = '$celular', estado = '$estado', cidade = '$cidade', bairro = '$bairro', email = '$email', cep = '$cep', rua = '$rua' where cpf = '$cpf'");
 
+$_SESSION['dados_atualizados'] = true;
+
 
 mysqli_close($conexao);
 header("Location: ../checkout.php");
