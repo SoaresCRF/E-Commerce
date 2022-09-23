@@ -4,4 +4,4 @@
 ## Melhorias/Atualizações 
 - Organizar pastas no padrão MVC
 - Melhorar a tela de login do cliente
-- Atulizar o carrinho caso tenha itens salvos e esses itens não possuirem mais estoque devido a compra por outro cliente.
+- Atualizar o carrinho caso tenha itens salvos e esses itens não possuírem mais estoque devido a compra por outro cliente.
