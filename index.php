@@ -28,17 +28,6 @@ session_start();
             ?>
 
             <?php
-            if (isset($_SESSION['cliente_cadastrado'])) :
-            ?>
-                <div class="notification is-success">
-                    <p style="color: green; font-size: 17.9px;">Cadastro efetuado com sucesso!!!</p>
-                </div>
-            <?php
-            endif;
-            unset($_SESSION['cliente_cadastrado']);
-            ?>
-
-            <?php
             if (isset($_SESSION['usuario_desativado'])) :
             ?>
                 <div class="notification is-danger">

@@ -102,6 +102,16 @@ include("verificar_acesso/verifica_login_cliente.php");
                             <?php } ?>
                         </div>
                         <?php if ($_SESSION['cargo'] != "cliente") { ?>
+                            <?php
+                            if (isset($_SESSION['cliente_cadastrado'])) :
+                            ?>
+                                <div class="text-center mb-4">
+                                    <p style="color: green; font-size: 20px;">Cadastro efetuado com sucesso! <a style="color: green; font-weight: bold;" href="login_cliente.php">Clique aqui</a></p>
+                                </div>
+                            <?php
+                            endif;
+                            unset($_SESSION['cliente_cadastrado']);
+                            ?>
                             <div class="navbar-nav ml-auto py-0">
                                 <a href="login_cliente.php" class="nav-item nav-link">Login</a>
                                 <a href="registrar_cliente.php" class="nav-item nav-link">Registrar</a>

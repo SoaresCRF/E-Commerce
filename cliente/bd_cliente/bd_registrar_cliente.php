@@ -242,5 +242,5 @@ if (mysqli_query($conexao, "INSERT INTO clientes_cadastrados VALUES ('$nome_clie
 
 
 mysqli_close($conexao);
-header('Location: ../../index.php');
+header('Location: ../todos_produtos.php');
 exit;
