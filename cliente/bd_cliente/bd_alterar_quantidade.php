@@ -7,8 +7,7 @@ $quantidade = mysqli_real_escape_string($conexao, trim($_POST['quantidade']));
 $cpf = $_SESSION['cpf'];
 
 // Consulta o estoque
-$sql = "SELECT estoque FROM produtos where cod_produto = '$cod_produto'";
-$query = mysqli_query($conexao, $sql);
+$query = mysqli_query($conexao, "SELECT estoque FROM produtos where cod_produto = '$cod_produto'");
 $row_produtos = mysqli_fetch_assoc($query);
 
 // Se o estoque for maior ou igual a quantidade pedida e a quantidade pedida for maior do que zero realiza a alteração da quantidade 

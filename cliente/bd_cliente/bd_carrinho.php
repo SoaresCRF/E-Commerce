@@ -15,26 +15,22 @@ $quantidade = 1;
 $cpf = $_SESSION['cpf'];
 
 // Consulta a quantidade de ocorrência do CPF e a quantidade de produtos no carrinho
-$sql = "SELECT count(cpf), quantidade FROM carrinho where cpf = '$cpf' and  cod_produto = '$cod_produto'";
-$query_carrinho = mysqli_query($conexao, $sql);
+$query_carrinho = mysqli_query($conexao, "SELECT count(cpf), quantidade FROM carrinho where cpf = '$cpf' and  cod_produto = '$cod_produto'");
 $row_carrinho = mysqli_fetch_assoc($query_carrinho);
 
 // Consulta o estoque e valor de venda
-$sql = "SELECT estoque, valor_venda FROM produtos where cod_produto = '$cod_produto'";
-$query_produtos = mysqli_query($conexao, $sql);
+$query_produtos = mysqli_query($conexao, "SELECT estoque, valor_venda FROM produtos where cod_produto = '$cod_produto'");
 $row_produtos = mysqli_fetch_assoc($query_produtos);
 $valor_venda = $row_produtos['valor_venda'];
 
 if ($row_produtos['estoque'] > 0) {
     if ($row_carrinho['count(cpf)'] == 0) {
-        $sql = "INSERT INTO carrinho (cpf, cod_produto, quantidade, total) VALUES ('$cpf','$cod_produto', '$quantidade', '$valor_venda')";
-        mysqli_query($conexao, $sql);
+        mysqli_query($conexao, "INSERT INTO carrinho (cpf, cod_produto, quantidade, total) VALUES ('$cpf','$cod_produto', '$quantidade', '$valor_venda')");
         $_SESSION['item_adicionado'] = true;
     } else {
         if ($row_produtos['estoque'] >= $quantidade += $row_carrinho['quantidade']) {
             mysqli_query($conexao, "SET sql_safe_updates=0");
-            $sql = "UPDATE carrinho set quantidade = $quantidade where cod_produto = '$cod_produto' and cpf = '$cpf'";
-            mysqli_query($conexao, $sql);
+            mysqli_query($conexao, "UPDATE carrinho set quantidade = $quantidade where cod_produto = '$cod_produto' and cpf = '$cpf'");
             mysqli_query($conexao, "SET sql_safe_updates=1");
             $_SESSION['item_adicionado'] = true;
         }

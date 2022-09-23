@@ -20,8 +20,7 @@ function cadastrarFuncionario()
 
 
     // Consulta se o usuário existe
-    $sql = "SELECT count(*) as total from funcionarios where usuario = '$usuario'";
-    $query_funcionarios = mysqli_query($conexao, $sql);
+    $query_funcionarios = mysqli_query($conexao, "SELECT count(*) as total from funcionarios where usuario = '$usuario'");
     $row_funcionarios = mysqli_fetch_assoc($query_funcionarios);
     if ($row_funcionarios['total'] == 1) {
         $_SESSION['usuario_existe'] = true;
@@ -31,12 +30,11 @@ function cadastrarFuncionario()
 
 
     // Cadastra novo usuário
-    $sql = "INSERT INTO funcionarios (usuario, cargo) VALUES ('$usuario', '$cargo')";
-    if (mysqli_query($conexao, $sql) === TRUE) {
+    if (mysqli_query($conexao, "INSERT INTO funcionarios (usuario, cargo) VALUES ('$usuario', '$cargo')") === TRUE) {
         $_SESSION['status_cadastro'] = true;
     }
 
-    
+
     mysqli_close($conexao);
     header('Location: ../cadastrar_funcionario.php');
     exit;
@@ -58,8 +56,7 @@ function cadastrarProduto()
 
 
     // Consulta se nome e fornecedor do produto já existem
-    $sql = "SELECT count(*) as total from produtos where nome_produto = '$nome_produto' and fornecedor = '$fornecedor'";
-    $query_produtos = mysqli_query($conexao, $sql);
+    $query_produtos = mysqli_query($conexao, "SELECT count(*) as total from produtos where nome_produto = '$nome_produto' and fornecedor = '$fornecedor'");
     $row_produtos = mysqli_fetch_assoc($query_produtos);
     if ($row_produtos['total'] == 1) {
         $_SESSION['produto_existe'] = true;
@@ -69,8 +66,7 @@ function cadastrarProduto()
 
 
     // Consulta se código de produto já existe
-    $sql = "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'";
-    $query_produtos = mysqli_query($conexao, $sql);
+    $query_produtos = mysqli_query($conexao, "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'");
     $row_produtos = mysqli_fetch_assoc($query_produtos);
     if ($row_produtos['total'] == 1) {
         $_SESSION['cod_produto_existe'] = true;
@@ -80,8 +76,7 @@ function cadastrarProduto()
 
 
     // Cadastra novo produto
-    $sql = "INSERT INTO produtos (cod_produto, nome_produto, fornecedor, custo_produto, valor_venda, estoque, data_cadastro, categoria) VALUES ('$cod_produto','$nome_produto', '$fornecedor', '$custo_produto', '$valor_venda', '$estoque', NOW(), '$categoria')";
-    if (mysqli_query($conexao, $sql) === TRUE) {
+    if (mysqli_query($conexao, "INSERT INTO produtos (cod_produto, nome_produto, fornecedor, custo_produto, valor_venda, estoque, data_cadastro, categoria) VALUES ('$cod_produto','$nome_produto', '$fornecedor', '$custo_produto', '$valor_venda', '$estoque', NOW(), '$categoria')") === TRUE) {
         $_SESSION['status_cadastro'] = true;
     }
 
@@ -103,13 +98,12 @@ function editarProduto()
     $valor_venda = mysqli_real_escape_string($conexao, trim($_POST['valor_venda']));
     $categoria = mysqli_real_escape_string($conexao, trim($_POST['categoria']));
     $estoque = mysqli_real_escape_string($conexao, trim($_POST['estoque']));
-    
+
 
 
 
     // Consulta se o id do produto existe
-    $sql = "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'";
-    $query_produtos = mysqli_query($conexao, $sql);
+    $query_produtos = mysqli_query($conexao, "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'");
     $row_produtos = mysqli_fetch_assoc($query_produtos);
     if ($row_produtos['total'] == 0) {
         $_SESSION['cod_produto_nao_existe'] = true;
@@ -119,8 +113,7 @@ function editarProduto()
 
 
     // Atualiza informação do produto cadastrado
-    $sql = "UPDATE produtos set categoria = '$categoria',custo_produto = '$custo_produto', valor_venda = '$valor_venda', estoque = '$estoque' + estoque, data_cadastro = NOW() where cod_produto = '$cod_produto';";
-    if (mysqli_query($conexao, $sql) === TRUE) {
+    if (mysqli_query($conexao, "UPDATE produtos set categoria = '$categoria',custo_produto = '$custo_produto', valor_venda = '$valor_venda', estoque = '$estoque' + estoque, data_cadastro = NOW() where cod_produto = '$cod_produto'") === TRUE) {
         $_SESSION['status_editado'] = true;
     }
 

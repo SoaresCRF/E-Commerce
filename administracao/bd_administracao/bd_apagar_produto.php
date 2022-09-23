@@ -5,8 +5,7 @@ include("../../_conect/conexao.php");
 $cod_produto = filter_input(INPUT_GET, "cod_produto", FILTER_SANITIZE_NUMBER_INT);
 
 // Consulta se o código do produto existe
-$sql = "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'";
-$query_produtos = mysqli_query($conexao, $sql);
+$query_produtos = mysqli_query($conexao, "SELECT count(*) as total from produtos where cod_produto = '$cod_produto'");
 $row_produtos = mysqli_fetch_assoc($query_produtos);
 if ($row_produtos['total'] == 0) {
     $_SESSION['cod_produto_nao_existe'] = true;
@@ -15,8 +14,7 @@ if ($row_produtos['total'] == 0) {
 }
 
 // Deleta o produto
-$sql = "DELETE from produtos where cod_produto = '$cod_produto';";
-if (mysqli_query($conexao, $sql) === TRUE) {
+if (mysqli_query($conexao, "DELETE from produtos where cod_produto = '$cod_produto'") === TRUE) {
     $_SESSION['status_apagado'] = true;
 }
 

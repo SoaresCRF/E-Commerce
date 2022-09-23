@@ -12,8 +12,7 @@ if ($_SESSION['cargo'] != "cliente") {
 
 $cpf = $_SESSION['cpf'];
 // Consulta o carrinho de compra do cliente logado
-$sql = "SELECT * from carrinho where cpf = '$cpf'";
-$query_carrinho = mysqli_query($conexao, $sql);
+$query_carrinho = mysqli_query($conexao, "SELECT * from carrinho where cpf = '$cpf'");
 if (mysqli_num_rows($query_carrinho) > 0) {
     mysqli_query($conexao, "SET sql_safe_updates=0");
 
@@ -23,16 +22,14 @@ if (mysqli_num_rows($query_carrinho) > 0) {
         $qtd_comprada = $row_carrinho['quantidade'];
 
         // Salva as informações do produto que está no carrinho
-        $sql = "SELECT * from produtos where cod_produto = '$cod_produto'";
-        $query_produtos = mysqli_query($conexao, $sql);
+        $query_produtos = mysqli_query($conexao, "SELECT * from produtos where cod_produto = '$cod_produto'");
         $row_produtos = mysqli_fetch_assoc($query_produtos);
         $nome_produto = $row_produtos['nome_produto'];
         $fornecedor = $row_produtos['fornecedor'];
         $valor_venda = $row_produtos['valor_venda'];
 
         // Consulta se o cliente tem compra realizada no dia de hoje
-        $sql = "SELECT count(cod_produto) FROM controle_venda where data_venda = CURDATE() and cod_produto = '$cod_produto' and cpf_cliente = '$cpf'";
-        $query_controle_venda = mysqli_query($conexao, $sql);
+        $query_controle_venda = mysqli_query($conexao, "SELECT count(cod_produto) FROM controle_venda where data_venda = CURDATE() and cod_produto = '$cod_produto' and cpf_cliente = '$cpf'");
         $row_controle_venda = mysqli_fetch_assoc($query_controle_venda);
 
         // Se for igual a 0 cliente não tem compra realizada no dia de hoje então adiciona uma nova linha em controle_venda
@@ -48,12 +45,10 @@ if (mysqli_num_rows($query_carrinho) > 0) {
             $_SESSION['compra_realizada'] = true;
 
             // Atualiza o estoque dos produtos na loja
-            $sql = "UPDATE produtos set estoque = estoque - '$qtd_comprada' where cod_produto = '$cod_produto'";
-            mysqli_query($conexao, $sql);
+            mysqli_query($conexao, "UPDATE produtos set estoque = estoque - '$qtd_comprada' where cod_produto = '$cod_produto'");
 
             // Consulta se o cliente já realizou a compra desse mesmo produto
-            $sql = "SELECT count(cod_produto) FROM pedidos_concluidos where cod_produto = '$cod_produto' and cpf_cliente = '$cpf'";
-            $query_pedidos_concluidos = mysqli_query($conexao, $sql);
+            $query_pedidos_concluidos = mysqli_query($conexao, "SELECT count(cod_produto) FROM pedidos_concluidos where cod_produto = '$cod_produto' and cpf_cliente = '$cpf'");
             $row_pedidos_concluidos = mysqli_fetch_assoc($query_pedidos_concluidos);
 
             // Se for igual a 0 cliente não realizou a compra desse mesmo produto então adiciona uma nova linha em pedidos_concluidos
@@ -66,8 +61,7 @@ if (mysqli_num_rows($query_carrinho) > 0) {
 
             // Remove o item do carrinho
             if (mysqli_query($conexao, $sql) === TRUE) {
-                $sql = "DELETE from carrinho where cpf = '$cpf' and cod_produto = '$cod_produto'";
-                mysqli_query($conexao, $sql);
+                mysqli_query($conexao, "DELETE from carrinho where cpf = '$cpf' and cod_produto = '$cod_produto'");
             }
         }
     }

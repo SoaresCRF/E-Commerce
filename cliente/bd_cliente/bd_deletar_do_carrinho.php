@@ -9,12 +9,10 @@ $cpf = $_SESSION['cpf'];
 
 if (isset($_POST["deletar_tudo"]) == "deletar_tudo") {
     mysqli_query($conexao, "SET sql_safe_updates=0");
-    $sql = "DELETE from carrinho where cpf = '$cpf'";
-    mysqli_query($conexao, $sql);
+    mysqli_query($conexao, "DELETE from carrinho where cpf = '$cpf'");
     mysqli_query($conexao, "SET sql_safe_updates=1");
 } else {
-    $sql = "DELETE from carrinho where cod_produto = '$cod_produto' and cpf = '$cpf'";
-    mysqli_query($conexao, $sql);
+    mysqli_query($conexao, "DELETE from carrinho where cod_produto = '$cod_produto' and cpf = '$cpf'");
 }
 
 mysqli_close($conexao);

@@ -116,13 +116,11 @@ if (!preg_match("/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕ
 
 
 //Verifica se o email cadastrado é do cliente atual
-$sql = "SELECT count(*) as total from clientes_cadastrados where email = '$email' and cpf = '$cpf'";
-$query_clientes_cadastrados = mysqli_query($conexao, $sql);
+$query_clientes_cadastrados = mysqli_query($conexao, "SELECT count(*) as total from clientes_cadastrados where email = '$email' and cpf = '$cpf'");
 $row_clientes_cadastrados = mysqli_fetch_assoc($query_clientes_cadastrados);
 if ($row_clientes_cadastrados['total'] != 1) {
     //Se não for verifica se o email já foi cadastrado
-    $sql = "SELECT count(*) as total from clientes_cadastrados where email = '$email'";
-    $query_clientes_cadastrados = mysqli_query($conexao, $sql);
+    $query_clientes_cadastrados = mysqli_query($conexao, "SELECT count(*) as total from clientes_cadastrados where email = '$email'");
     $row_clientes_cadastrados = mysqli_fetch_assoc($query_clientes_cadastrados);
     if ($row_clientes_cadastrados['total'] == 1) {
         $_SESSION['email_existe'] = true;
@@ -139,8 +137,7 @@ $cep = preg_replace('/[^0-9]/', "", $cep);
 
 
 //Atualiza os dados do cliente
-$sql = "UPDATE clientes_cadastrados set numero_casa = '$numero_casa', celular = '$celular', estado = '$estado', cidade = '$cidade', bairro = '$bairro', email = '$email', cep = '$cep', rua = '$rua' where cpf = '$cpf'";
-mysqli_query($conexao, $sql);
+mysqli_query($conexao, "UPDATE clientes_cadastrados set numero_casa = '$numero_casa', celular = '$celular', estado = '$estado', cidade = '$cidade', bairro = '$bairro', email = '$email', cep = '$cep', rua = '$rua' where cpf = '$cpf'");
 
 
 mysqli_close($conexao);

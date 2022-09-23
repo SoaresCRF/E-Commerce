@@ -14,8 +14,7 @@ $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
 
 //Consulta a tabela de cliente cadastrados
-$sql  = "SELECT username, senha, cpf, cargo, sexo from clientes_cadastrados where username = '$username' and senha = '$senha'";
-$query_clientes_cadastrados  = mysqli_query($conexao, $sql);
+$query_clientes_cadastrados  = mysqli_query($conexao, "SELECT username, senha, cpf, cargo, sexo from clientes_cadastrados where username = '$username' and senha = '$senha'");
 
 // Verifica se os dados são inválidos e/ou o usuário não existe
 if (mysqli_num_rows($query_clientes_cadastrados) != 1) {
