@@ -44,31 +44,30 @@
     </div>
     <div class="row px-xl-5 pb-3">
         <?php
-        $sql = "SELECT * FROM produtos order by nome_produto, fornecedor";
-        $query = mysqli_query($conexao, $sql);
-        while ($row_produto = mysqli_fetch_assoc($query)) { ?>
+        $query_produtos = mysqli_query($conexao, "SELECT * FROM produtos order by nome_produto, fornecedor");
+        while ($row_produtos = mysqli_fetch_assoc($query_produtos)) { ?>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                         <img class="img-fluid w-100" src="../img/produto_ficticio.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3"><?php echo $row_produto['nome_produto']; ?></h6>
+                        <h6 class="text-truncate mb-3"><?php echo $row_produtos['nome_produto']; ?></h6>
                         <div class="d-flex justify-content-center">
-                            <h6>R$ <?php echo number_format($row_produto['valor_venda'], 2, ',', '.'); ?></h6>
+                            <h6>R$ <?php echo number_format($row_produtos['valor_venda'], 2, ',', '.'); ?></h6>
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                        <?php if ($_SESSION['cargo'] != "cliente" or $row_produto['estoque'] < 1) { ?>
+                        <?php if ($_SESSION['cargo'] != "cliente" or $row_produtos['estoque'] < 1) { ?>
                             <?php if ($_SESSION['cargo'] != "cliente") { ?>
                                 <a href="#" onclick="realize_login_carrinho();" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add ao carrinho</a>
                             <?php } else { ?>
                                 <a href="#" onclick="estoque_esgotado();" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add ao carrinho</a>
                             <?php } ?>
                         <?php  } else { ?>
-                            <a href="bd_cliente/bd_carrinho.php?cod_produto=<?php echo $row_produto['cod_produto']; ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add ao carrinho</a>
+                            <a href="bd_cliente/bd_carrinho.php?cod_produto=<?php echo $row_produtos['cod_produto']; ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add ao carrinho</a>
                         <?php } ?>
-                        <span class="btn-sm text-dark p-0">Estoque: <?php echo $row_produto['estoque']; ?></span>
+                        <span class="btn-sm text-dark p-0">Estoque: <?php echo $row_produtos['estoque']; ?></span>
                     </div>
                 </div>
             </div>
