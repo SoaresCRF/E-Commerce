@@ -1,5 +1,5 @@
 # E-Commerce
- Simulação de uma tela de gerenciamento de um e-commerce e tela de vendas de produtos/cadastro de clientes, entre outros.
+ Simulação de uma tela de gerenciamento de um e-commerce e tela de vendas de produtos/cadastro de clientes, entre outros. (Projeto apenas para estudos)
  
  ## 3 telas: Dono, gerente e cliente
  
